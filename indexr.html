@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sehatin - Level Up Your Health</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">Sehatin</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Cart
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Level Up Your Health with Sehatin</h1>
+        <p>
+          Makanan sehat itu enak! Rasakan energi maksimal dengan menu bergizi
+          tinggi yang bikin kamu tetap on fire 🔥
+        </p>
+        <button
+          class="cta-btn"
+          onclick="
+            document
+              .getElementById('menu')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
+          Pesan Sekarang
+        </button>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+      <h2 class="section-title" data-aos="fade-up">Menu Kami</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Pilihan makanan & minuman sehat untuk gaya hidup Gen Z yang lebih baik
+      </p>
+
+      <div class="menu-grid">
+        <!-- Menu Item 1 -->
+        <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="menu-image">🥗</div>
+          <div class="menu-info">
+            <h3 class="menu-name">Green Power Bowl</h3>
+            <p class="menu-desc">
+              Quinoa, avocado, edamame, dan sayuran segar dengan dressing lemon
+              honey
+            </p>
+            <div class="nutrition">
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kalori</span>
+                <span class="nutrition-value">380</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Protein</span>
+                <span class="nutrition-value">18g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Serat</span>
+                <span class="nutrition-value">12g</span>
+              </div>
+            </div>
+            <div class="menu-footer">
+              <span class="price">45K</span>
+              <div
+                class="quantity-control"
+                id="qty-green-power-bowl"
+                style="display: none"
+              >
+                <button
+                  class="qty-btn"
+                  onclick="decrementQty('Green Power Bowl', 45000)"
+                >
+                  −
+                </button>
+                <span class="qty-display" id="display-green-power-bowl">0</span>
+                <button
+                  class="qty-btn"
+                  onclick="incrementQty('Green Power Bowl', 45000)"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="add-to-cart"
+                id="btn-green-power-bowl"
+                onclick="addToCart('Green Power Bowl', 45000)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 2 -->
+        <div class="menu-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="menu-image">🍗</div>
+          <div class="menu-info">
+            <h3 class="menu-name">Grilled Chicken Wrap</h3>
+            <p class="menu-desc">
+              Ayam panggang, whole wheat wrap, selada, tomat, dan greek yogurt
+              sauce
+            </p>
+            <div class="nutrition">
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kalori</span>
+                <span class="nutrition-value">420</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Protein</span>
+                <span class="nutrition-value">32g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Serat</span>
+                <span class="nutrition-value">8g</span>
+              </div>
+            </div>
+            <div class="menu-footer">
+              <span class="price">42K</span>
+              <div
+                class="quantity-control"
+                id="qty-grilled-chicken-wrap"
+                style="display: none"
+              >
+                <button
+                  class="qty-btn"
+                  onclick="decrementQty('Grilled Chicken Wrap', 42000)"
+                >
+                  −
+                </button>
+                <span class="qty-display" id="display-grilled-chicken-wrap"
+                  >0</span
+                >
+                <button
+                  class="qty-btn"
+                  onclick="incrementQty('Grilled Chicken Wrap', 42000)"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="add-to-cart"
+                id="btn-grilled-chicken-wrap"
+                onclick="addToCart('Grilled Chicken Wrap', 42000)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 3 -->
+        <div class="menu-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="menu-image">🥤</div>
+          <div class="menu-info">
+            <h3 class="menu-name">Berry Blast Smoothie</h3>
+            <p class="menu-desc">
+              Campuran strawberry, blueberry, banana, dan protein powder untuk
+              boost energi
+            </p>
+            <div class="nutrition">
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kalori</span>
+                <span class="nutrition-value">250</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Protein</span>
+                <span class="nutrition-value">15g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Vitamin C</span>
+                <span class="nutrition-value">85mg</span>
+              </div>
+            </div>
+            <div class="menu-footer">
+              <span class="price">35K</span>
+              <div
+                class="quantity-control"
+                id="qty-berry-blast-smoothie"
+                style="display: none"
+              >
+                <button
+                  class="qty-btn"
+                  onclick="decrementQty('Berry Blast Smoothie', 35000)"
+                >
+                  −
+                </button>
+                <span class="qty-display" id="display-berry-blast-smoothie"
+                  >0</span
+                >
+                <button
+                  class="qty-btn"
+                  onclick="incrementQty('Berry Blast Smoothie', 35000)"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="add-to-cart"
+                id="btn-berry-blast-smoothie"
+                onclick="addToCart('Berry Blast Smoothie', 35000)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 4 -->
+        <div class="menu-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="menu-image">🍜</div>
+          <div class="menu-info">
+            <h3 class="menu-name">Veggie Ramen Bowl</h3>
+            <p class="menu-desc">
+              Mie shirataki, kuah kaldu sayuran, telur rebus, dan topping
+              sayuran segar
+            </p>
+            <div class="nutrition">
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kalori</span>
+                <span class="nutrition-value">320</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Protein</span>
+                <span class="nutrition-value">14g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Serat</span>
+                <span class="nutrition-value">10g</span>
+              </div>
+            </div>
+            <div class="menu-footer">
+              <span class="price">38K</span>
+              <div
+                class="quantity-control"
+                id="qty-veggie-ramen-bowl"
+                style="display: none"
+              >
+                <button
+                  class="qty-btn"
+                  onclick="decrementQty('Veggie Ramen Bowl', 38000)"
+                >
+                  −
+                </button>
+                <span class="qty-display" id="display-veggie-ramen-bowl"
+                  >0</span
+                >
+                <button
+                  class="qty-btn"
+                  onclick="incrementQty('Veggie Ramen Bowl', 38000)"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="add-to-cart"
+                id="btn-veggie-ramen-bowl"
+                onclick="addToCart('Veggie Ramen Bowl', 38000)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 5 -->
+        <div class="menu-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="menu-image">🥪</div>
+          <div class="menu-info">
+            <h3 class="menu-name">Protein Sandwich</h3>
+            <p class="menu-desc">
+              Roti gandum, tuna, telur, keju low-fat, dan sayuran organik
+              pilihan
+            </p>
+            <div class="nutrition">
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kalori</span>
+                <span class="nutrition-value">390</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Protein</span>
+                <span class="nutrition-value">28g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Serat</span>
+                <span class="nutrition-value">9g</span>
+              </div>
+            </div>
+            <div class="menu-footer">
+              <span class="price">40K</span>
+              <div
+                class="quantity-control"
+                id="qty-protein-sandwich"
+                style="display: none"
+              >
+                <button
+                  class="qty-btn"
+                  onclick="decrementQty('Protein Sandwich', 40000)"
+                >
+                  −
+                </button>
+                <span class="qty-display" id="display-protein-sandwich">0</span>
+                <button
+                  class="qty-btn"
+                  onclick="incrementQty('Protein Sandwich', 40000)"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="add-to-cart"
+                id="btn-protein-sandwich"
+                onclick="addToCart('Protein Sandwich', 40000)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 6 -->
+        <div class="menu-card" data-aos="fade-up" data-aos-delay="700">
+          <div class="menu-image">🍵</div>
+          <div class="menu-info">
+            <h3 class="menu-name">Matcha Latte</h3>
+            <p class="menu-desc">
+              Premium matcha dari Jepang dengan oat milk, kaya antioksidan dan
+              energi alami
+            </p>
+            <div class="nutrition">
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kalori</span>
+                <span class="nutrition-value">180</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Antioksidan</span>
+                <span class="nutrition-value">Tinggi</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="nutrition-label">Kafein</span>
+                <span class="nutrition-value">70mg</span>
+              </div>
+            </div>
+            <div class="menu-footer">
+              <span class="price">32K</span>
+              <div
+                class="quantity-control"
+                id="qty-matcha-latte"
+                style="display: none"
+              >
+                <button
+                  class="qty-btn"
+                  onclick="decrementQty('Matcha Latte', 32000)"
+                >
+                  −
+                </button>
+                <span class="qty-display" id="display-matcha-latte">0</span>
+                <button
+                  class="qty-btn"
+                  onclick="incrementQty('Matcha Latte', 32000)"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="add-to-cart"
+                id="btn-matcha-latte"
+                onclick="addToCart('Matcha Latte', 32000)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary" id="cartSummary">
+      <div class="cart-header">
+        <h2>Keranjang</h2>
+        <button class="close-cart" onclick="toggleCart()">×</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <div class="empty-cart">
+          <p>Keranjang masih kosong</p>
+          <p>Yuk mulai pesan! 🛒</p>
+        </div>
+      </div>
+      <div class="cart-total" id="cartTotalSection" style="display: none">
+        <span>Total:</span>
+        <span id="cartTotal">Rp 0</span>
+      </div>
+      <button
+        class="checkout-btn"
+        id="checkoutBtn"
+        style="display: none"
+        onclick="checkout()"
+      >
+        <span style="font-size: 1.5rem">💬</span> Pesan via WhatsApp
+      </button>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <h2 class="section-title" data-aos="fade-up">Hubungi Kami</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+          Punya pertanyaan? Atau mau custom menu? Chat aja!
+        </p>
+
+        <form
+          class="contact-form"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          onsubmit="submitForm(event)"
+        >
+          <div class="form-group">
+            <label for="name">Nama</label>
+            <input type="text" id="name" required placeholder="Nama kamu" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              required
+              placeholder="email@example.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">No. WhatsApp</label>
+            <input type="tel" id="phone" required placeholder="08123456789" />
+          </div>
+          <div class="form-group">
+            <label for="message">Pesan</label>
+            <textarea
+              id="message"
+              required
+              placeholder="Tulis pesan kamu di sini..."
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Kirim Pesan</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 Sehatin. All rights reserved. Stay healthy, stay happy! 💪
+      </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+      });
+
+      // Cart functionality
+      let cart = [];
+
+      function toggleCart() {
+        const cartSummary = document.getElementById("cartSummary");
+        cartSummary.classList.toggle("active");
+      }
+
+      function getMenuId(name) {
+        return name.toLowerCase().replace(/\s+/g, "-");
+      }
+
+      function updateMenuDisplay(name) {
+        const menuId = getMenuId(name);
+        const item = cart.find((i) => i.name === name);
+        const quantity = item ? item.quantity : 0;
+
+        const qtyControl = document.getElementById(`qty-${menuId}`);
+        const addBtn = document.getElementById(`btn-${menuId}`);
+        const qtyDisplay = document.getElementById(`display-${menuId}`);
+
+        if (quantity > 0) {
+          qtyControl.style.display = "flex";
+          addBtn.style.display = "none";
+          qtyDisplay.textContent = quantity;
+        } else {
+          qtyControl.style.display = "none";
+          addBtn.style.display = "block";
+        }
+      }
+
+      function addToCart(name, price) {
+        const existingItem = cart.find((item) => item.name === name);
+
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({ name, price, quantity: 1 });
+        }
+
+        updateMenuDisplay(name);
+        updateCart();
+      }
+
+      function incrementQty(name, price) {
+        const item = cart.find((i) => i.name === name);
+        if (item) {
+          item.quantity++;
+          updateMenuDisplay(name);
+          updateCart();
+        }
+      }
+
+      function decrementQty(name, price) {
+        const item = cart.find((i) => i.name === name);
+        if (item) {
+          item.quantity--;
+          if (item.quantity === 0) {
+            cart = cart.filter((i) => i.name !== name);
+          }
+          updateMenuDisplay(name);
+          updateCart();
+        }
+      }
+
+      function changeQuantityInCart(name, change) {
+        const item = cart.find((i) => i.name === name);
+        if (item) {
+          item.quantity += change;
+          if (item.quantity <= 0) {
+            cart = cart.filter((i) => i.name !== name);
+          }
+          updateMenuDisplay(name);
+          updateCart();
+        }
+      }
+
+      function removeFromCart(name) {
+        cart = cart.filter((i) => i.name !== name);
+        updateMenuDisplay(name);
+        updateCart();
+      }
+
+      function updateCart() {
+        const cartItems = document.getElementById("cartItems");
+        const cartCount = document.getElementById("cartCount");
+        const cartTotal = document.getElementById("cartTotal");
+        const cartTotalSection = document.getElementById("cartTotalSection");
+        const checkoutBtn = document.getElementById("checkoutBtn");
+
+        if (cart.length === 0) {
+          cartItems.innerHTML =
+            '<div class="empty-cart"><p>Keranjang masih kosong</p><p>Yuk mulai pesan! 🛒</p></div>';
+          cartTotalSection.style.display = "none";
+          checkoutBtn.style.display = "none";
+          cartCount.textContent = "0";
+          return;
+        }
+
+        let total = 0;
+        let totalItems = 0;
+        let html = "";
+
+        cart.forEach((item, index) => {
+          total += item.price * item.quantity;
+          totalItems += item.quantity;
+          html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <strong>${item.name}</strong><br>
+                            <small style="color: var(--text-gray);">Rp ${item.price.toLocaleString("id-ID")} / item</small>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="cart-qty-control">
+                                <button class="cart-qty-btn" onclick="changeQuantityInCart('${item.name}', -1)">−</button>
+                                <span class="cart-qty-display">${item.quantity}</span>
+                                <button class="cart-qty-btn" onclick="changeQuantityInCart('${item.name}', 1)">+</button>
+                            </div>
+                            <button class="cart-qty-btn remove" onclick="removeFromCart('${item.name}')" title="Hapus item">×</button>
+                        </div>
+                    </div>
+                `;
+        });
+
+        cartItems.innerHTML = html;
+        cartCount.textContent = totalItems;
+        cartTotal.textContent = `Rp ${total.toLocaleString("id-ID")}`;
+        cartTotalSection.style.display = "flex";
+        checkoutBtn.style.display = "flex";
+      }
+
+      function checkout() {
+        if (cart.length === 0) return;
+
+        // Format pesan WhatsApp
+        let message = "*PESANAN SEHATIN*\n\n";
+        message += "*Detail Pesanan:*\n";
+        message += "━━━━━━━━━━━━━━━━\n";
+
+        let total = 0;
+        cart.forEach((item, index) => {
+          const subtotal = item.price * item.quantity;
+          total += subtotal;
+          message += `\n${index + 1}. *${item.name}*\n`;
+          message += `   Qty: ${item.quantity}x\n`;
+          message += `   Harga: Rp ${item.price.toLocaleString("id-ID")}\n`;
+          message += `   Subtotal: Rp ${subtotal.toLocaleString("id-ID")}\n`;
+        });
+
+        message += "\n━━━━━━━━━━━━━━━━\n";
+        message += `*TOTAL: Rp ${total.toLocaleString("id-ID")}*\n\n`;
+        message += "_Terima kasih telah memesan di Sehatin!_";
+
+        // Encode pesan untuk URL
+        const encodedMessage = encodeURIComponent(message);
+
+        // Nomor WhatsApp (ganti dengan nomor bisnis Anda)
+        // Format: 62xxx (tanpa +, tanpa 0 di depan)
+        const waNumber = "6281939707215"; // Ganti dengan nomor WA bisnis Anda
+
+        // Buka WhatsApp
+        const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+        window.open(waURL, "_blank");
+
+        // Optional: Clear cart setelah checkout
+        // cart = [];
+        // updateCart();
+        // toggleCart();
+      }
+
+      function submitForm(event) {
+        event.preventDefault();
+        alert(
+          "Terima kasih! Pesan kamu sudah diterima. Kami akan segera menghubungi kamu!",
+        );
+        event.target.reset();
+      }
+    </script>
+  </body>
+</html>
