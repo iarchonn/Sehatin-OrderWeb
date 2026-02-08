@@ -12,7 +12,6 @@
   </head>
   <body>
     <!-- Navigation -->
-    <!-- Navigation -->
     <nav>
       <div class="logo">Sehatin</div>
       <ul class="nav-links">
@@ -423,10 +422,93 @@
         class="checkout-btn"
         id="checkoutBtn"
         style="display: none"
-        onclick="checkout()"
+        onclick="openCheckoutModal()"
       >
-        <span style="font-size: 1.5rem">💬</span> Pesan via WhatsApp
+        <span style="font-size: 1.5rem"></span> Pesan via WhatsApp
       </button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Detail Pengiriman</h2>
+          <button class="close-modal" onclick="closeCheckoutModal()">×</button>
+        </div>
+        <form id="checkoutForm" onsubmit="submitOrder(event)">
+          <div class="modal-form-group">
+            <label for="customerName"
+              >Nama Lengkap <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="customerName"
+              required
+              placeholder="Masukkan nama lengkap"
+            />
+          </div>
+          <div class="modal-form-group">
+            <label for="customerPhone"
+              >No. WhatsApp <span class="required">*</span></label
+            >
+            <input
+              type="tel"
+              id="customerPhone"
+              required
+              placeholder="08123456789"
+            />
+            <small>Nomor WA aktif untuk konfirmasi pesanan</small>
+          </div>
+          <div class="modal-form-group">
+            <label for="customerAddress"
+              >Alamat Lengkap <span class="required">*</span></label
+            >
+            <textarea
+              id="customerAddress"
+              required
+              placeholder="Jl. Contoh No. 123, RT/RW, Kelurahan, Kecamatan, Kota"
+            ></textarea>
+            <small>Mohon isi alamat lengkap untuk pengiriman</small>
+          </div>
+          <div class="modal-form-group">
+            <label for="customerNotes">Catatan (Opsional)</label>
+            <textarea
+              id="customerNotes"
+              placeholder="Contoh: Tolong jangan pakai bawang, alergi"
+            ></textarea>
+          </div>
+
+          <!-- New Fields: Order Type, Payment Method, Proof -->
+          <div class="modal-form-group">
+            <label for="orderType">Jenis Pesanan <span class="required">*</span></label>
+            <select id="orderType" required>
+              <option value="" disabled selected>Pilih Jenis Pesanan</option>
+              <option value="Dine In">Dine In (Makan di Tempat)</option>
+              <option value="Take Away">Take Away (Bawa Pulang)</option>
+              <option value="Delivery">Delivery (Kirim ke Rumah)</option>
+            </select>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="paymentMethod">Metode Pembayaran <span class="required">*</span></label>
+            <select id="paymentMethod" required onchange="togglePaymentProof()">
+              <option value="" disabled selected>Pilih Metode Pembayaran</option>
+              <option value="Cash">Cash / Tunai</option>
+              <option value="Transfer BCA">Transfer BCA</option>
+              <option value="QRIS">QRIS</option>
+            </select>
+          </div>
+
+          <div class="modal-form-group" id="paymentProofContainer" style="display: none;">
+            <label for="paymentProof">Bukti Pembayaran</label>
+            <input type="file" id="paymentProof" accept="image/*" />
+            <small>Mohon lampirkan foto bukti pembayaran nanti di chat WhatsApp.</small>
+          </div>
+          <button type="submit" class="modal-submit-btn">
+            <span style="font-size: 1.5rem">💬</span> Kirim Pesanan ke WhatsApp
+          </button>
+        </form>
+      </div>
     </div>
 
     <!-- Contact Section -->
@@ -620,11 +702,42 @@
         checkoutBtn.style.display = "flex";
       }
 
+      function togglePaymentProof() {
+        const paymentMethod = document.getElementById("paymentMethod").value;
+        const proofContainer = document.getElementById("paymentProofContainer");
+        if (paymentMethod === "Transfer BCA" || paymentMethod === "QRIS") {
+          proofContainer.style.display = "block";
+        } else {
+          proofContainer.style.display = "none";
+        }
+      }
+
       function checkout() {
         if (cart.length === 0) return;
 
         // Format pesan WhatsApp
         let message = "*PESANAN SEHATIN*\n\n";
+
+        // Tambahkan informasi pembeli
+        const customerName = document.getElementById("customerName").value;
+        const customerPhone = document.getElementById("customerPhone").value;
+        const customerAddress = document.getElementById("customerAddress").value;
+        const customerNotes = document.getElementById("customerNotes").value;
+        const orderType = document.getElementById("orderType").value;
+        const paymentMethod = document.getElementById("paymentMethod").value;
+
+        message += "*Informasi Pembeli:*\n";
+        message += `Nama: ${customerName}\n`;
+        message += `No. WA: ${customerPhone}\n`;
+        message += `Alamat: ${customerAddress}\n`;
+        message += `Jenis Pesanan: ${orderType}\n`;
+        message += `Pembayaran: ${paymentMethod}\n`;
+        
+        if (customerNotes) {
+          message += `Catatan: ${customerNotes}\n`;
+        }
+        message += "\n━━━━━━━━━━━━━━━━\n";
+
         message += "*Detail Pesanan:*\n";
         message += "━━━━━━━━━━━━━━━━\n";
 
@@ -640,7 +753,13 @@
 
         message += "\n━━━━━━━━━━━━━━━━\n";
         message += `*TOTAL: Rp ${total.toLocaleString("id-ID")}*\n\n`;
-        message += "_Terima kasih telah memesan di Sehatin!_";
+        
+        if (paymentMethod === "Transfer BCA" || paymentMethod === "QRIS") {
+             message += "*CATATAN PENTING:*\n";
+             message += "Mohon kirimkan FOTO BUKTI PEMBAYARAN setelah pesan ini terkirim. Terima kasih! 📸\n\n";
+        }
+
+        message += "_Terima kasih telah memesan di Sehatin! 💪_";
 
         // Encode pesan untuk URL
         const encodedMessage = encodeURIComponent(message);
@@ -653,16 +772,58 @@
         const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
         window.open(waURL, "_blank");
 
-        // Optional: Clear cart setelah checkout
-        // cart = [];
-        // updateCart();
-        // toggleCart();
+        // Clear form dan cart setelah checkout
+        document.getElementById("checkoutForm").reset();
+        document.getElementById("paymentProofContainer").style.display = "none"; // Reset proof container visibility
+        cart = [];
+
+        // Update semua display menu
+        const menuItems = [
+          "Green Power Bowl",
+          "Grilled Chicken Wrap",
+          "Berry Blast Smoothie",
+          "Veggie Ramen Bowl",
+          "Protein Sandwich",
+          "Matcha Latte",
+        ];
+        menuItems.forEach((name) => updateMenuDisplay(name));
+
+        updateCart();
+        closeCheckoutModal();
+        toggleCart();
+
+        // Show success message
+        alert("Pesanan berhasil dikirim! Silakan cek WhatsApp Anda. 🎉");
       }
+
+      function openCheckoutModal() {
+        document.getElementById("modalOverlay").classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+      }
+
+      function closeCheckoutModal() {
+        document.getElementById("modalOverlay").classList.remove("active");
+        document.body.style.overflow = ""; // Restore scrolling
+      }
+
+      function submitOrder(event) {
+        event.preventDefault();
+        checkout();
+      }
+
+      // Close modal when clicking overlay
+      document
+        .getElementById("modalOverlay")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeCheckoutModal();
+          }
+        });
 
       function submitForm(event) {
         event.preventDefault();
         alert(
-          "Terima kasih! Pesan kamu sudah diterima. Kami akan segera menghubungi kamu!",
+          "Terima kasih! Pesan kamu sudah diterima. Kami akan segera menghubungi kamu! 📱",
         );
         event.target.reset();
       }

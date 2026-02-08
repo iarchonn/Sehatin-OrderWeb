@@ -483,6 +483,156 @@ nav {
   color: var(--text-gray);
 }
 
+/* Modal Popup */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--light-gray);
+}
+
+.modal-header h2 {
+  font-size: 1.8rem;
+  color: var(--text-dark);
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-gray);
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: var(--text-dark);
+}
+
+.modal-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.modal-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.modal-form-group input,
+.modal-form-group select,
+.modal-form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--light-gray);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.modal-form-group input:focus,
+.modal-form-group textarea:focus {
+  outline: none;
+  border-color: var(--electric-blue);
+}
+
+.modal-form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.modal-form-group small {
+  color: var(--text-gray);
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.modal-form-group input[type="file"] {
+  padding: 0.8rem;
+  background: var(--light-gray);
+}
+
+.modal-submit-btn {
+  width: 100%;
+  background: #25d366;
+  color: white;
+  padding: 1.2rem;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.modal-submit-btn:hover {
+  background: #128c7e;
+}
+
+.required {
+  color: #ef4444;
+}
+
 /* Contact Section */
 .contact-section {
   background: var(--light-gray);
