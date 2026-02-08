@@ -291,7 +291,7 @@
         <!-- Menu Item 5 -->
         <div class="menu-card" data-aos="fade-up" data-aos-delay="600">
           <div class="menu-image">
-            <img src="Images/Grilled Chicken Wrap.jpeg" />
+            <img src="Images/Protein Sandwich.jpeg" />
           </div>
           <div class="menu-info">
             <h3 class="menu-name">Protein Sandwich</h3>
@@ -480,7 +480,9 @@
 
           <!-- New Fields: Order Type, Payment Method, Proof -->
           <div class="modal-form-group">
-            <label for="orderType">Jenis Pesanan <span class="required">*</span></label>
+            <label for="orderType"
+              >Jenis Pesanan <span class="required">*</span></label
+            >
             <select id="orderType" required>
               <option value="" disabled selected>Pilih Jenis Pesanan</option>
               <option value="Dine In">Dine In (Makan di Tempat)</option>
@@ -490,19 +492,30 @@
           </div>
 
           <div class="modal-form-group">
-            <label for="paymentMethod">Metode Pembayaran <span class="required">*</span></label>
+            <label for="paymentMethod"
+              >Metode Pembayaran <span class="required">*</span></label
+            >
             <select id="paymentMethod" required onchange="togglePaymentProof()">
-              <option value="" disabled selected>Pilih Metode Pembayaran</option>
+              <option value="" disabled selected>
+                Pilih Metode Pembayaran
+              </option>
               <option value="Cash">Cash / Tunai</option>
               <option value="Transfer BCA">Transfer BCA</option>
               <option value="QRIS">QRIS</option>
             </select>
           </div>
 
-          <div class="modal-form-group" id="paymentProofContainer" style="display: none;">
+          <div
+            class="modal-form-group"
+            id="paymentProofContainer"
+            style="display: none"
+          >
             <label for="paymentProof">Bukti Pembayaran</label>
             <input type="file" id="paymentProof" accept="image/*" />
-            <small>Mohon lampirkan foto bukti pembayaran nanti di chat WhatsApp.</small>
+            <small
+              >Mohon lampirkan foto bukti pembayaran nanti di chat
+              WhatsApp.</small
+            >
           </div>
           <button type="submit" class="modal-submit-btn">
             <span style="font-size: 1.5rem">💬</span> Kirim Pesanan ke WhatsApp
@@ -721,7 +734,8 @@
         // Tambahkan informasi pembeli
         const customerName = document.getElementById("customerName").value;
         const customerPhone = document.getElementById("customerPhone").value;
-        const customerAddress = document.getElementById("customerAddress").value;
+        const customerAddress =
+          document.getElementById("customerAddress").value;
         const customerNotes = document.getElementById("customerNotes").value;
         const orderType = document.getElementById("orderType").value;
         const paymentMethod = document.getElementById("paymentMethod").value;
@@ -732,7 +746,7 @@
         message += `Alamat: ${customerAddress}\n`;
         message += `Jenis Pesanan: ${orderType}\n`;
         message += `Pembayaran: ${paymentMethod}\n`;
-        
+
         if (customerNotes) {
           message += `Catatan: ${customerNotes}\n`;
         }
@@ -753,10 +767,11 @@
 
         message += "\n━━━━━━━━━━━━━━━━\n";
         message += `*TOTAL: Rp ${total.toLocaleString("id-ID")}*\n\n`;
-        
+
         if (paymentMethod === "Transfer BCA" || paymentMethod === "QRIS") {
-             message += "*CATATAN PENTING:*\n";
-             message += "Mohon kirimkan FOTO BUKTI PEMBAYARAN setelah pesan ini terkirim. Terima kasih! 📸\n\n";
+          message += "*CATATAN PENTING:*\n";
+          message +=
+            "Mohon kirimkan FOTO BUKTI PEMBAYARAN setelah pesan ini terkirim. Terima kasih! 📸\n\n";
         }
 
         message += "_Terima kasih telah memesan di Sehatin! 💪_";
