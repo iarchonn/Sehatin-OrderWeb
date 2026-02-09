@@ -752,6 +752,7 @@
         message += `Alamat: ${customerAddress}\n`;
         message += `Jenis Pesanan: ${orderType}\n`;
         message += `Pembayaran: ${paymentMethod}\n`;
+        message += `Waktu Pemesanan:\n${orderTime}\n`;
 
         message += "\n━━━━━━━━━━━━━━━━\n";
 
@@ -769,20 +770,18 @@
         });
 
         message += "\n━━━━━━━━━━━━━━━━\n";
-        message += `*TOTAL: Rp ${total.toLocaleString("id-ID")}*\n\n`;
+        message += `*TOTAL: Rp ${total.toLocaleString("id-ID")}*\n`;
 
         if (customerNotes) {
           message += `*CATATAN:* ${customerNotes}\n`;
         }
 
-        message += `Waktu Pemesanan:\n ${orderTime}\n`;
-
-        if (paymentMethod === "Transfer BCA" || paymentMethod === "QRIS") {
-          message += "*CATATAN PENTING:*\n";
-          message +=
-            "Mohon kirimkan FOTO BUKTI PEMBAYARAN setelah pesan ini terkirim. Terima kasih! 📸\n\n";
-        }
-
+        // if (paymentMethod === "Transfer BCA" || paymentMethod === "QRIS") {
+        //   message += "\n*CATATAN PENTING:*\n";
+        //   message +=
+        //     "Mohon kirimkan FOTO BUKTI PEMBAYARAN setelah pesan ini terkirim. Terima kasih! 📸\n\n";
+        // }
+        message += "\n";
         message += "_Terima kasih telah memesan di Sehatin!_";
 
         // Encode pesan untuk URL
@@ -790,7 +789,7 @@
 
         // Nomor WhatsApp (ganti dengan nomor bisnis Anda)
         // Format: 62xxx (tanpa +, tanpa 0 di depan)
-        const waNumber = "6281939707215"; // Ganti dengan nomor WA bisnis Anda
+        const waNumber = "6283851990080"; // Ganti dengan nomor WA bisnis Anda
 
         // Buka WhatsApp
         const waURL = `https://wa.me/${waNumber}?text=${encodedMessage}`;
