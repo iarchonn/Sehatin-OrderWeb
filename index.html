@@ -740,6 +740,12 @@
         const orderType = document.getElementById("orderType").value;
         const paymentMethod = document.getElementById("paymentMethod").value;
 
+        const now = new Date();
+        const orderTime = now.toLocaleString("id-ID", {
+          dateStyle: "full",
+          timeStyle: "short",
+        });
+
         message += "*Informasi Pembeli:*\n";
         message += `Nama: ${customerName}\n`;
         message += `No. WA: ${customerPhone}\n`;
@@ -747,13 +753,10 @@
         message += `Jenis Pesanan: ${orderType}\n`;
         message += `Pembayaran: ${paymentMethod}\n`;
 
-        if (customerNotes) {
-          message += `Catatan: ${customerNotes}\n`;
-        }
         message += "\n━━━━━━━━━━━━━━━━\n";
 
         message += "*Detail Pesanan:*\n";
-        message += "━━━━━━━━━━━━━━━━\n";
+        message += "━━━━━━━━━━━━━━━━";
 
         let total = 0;
         cart.forEach((item, index) => {
@@ -768,13 +771,19 @@
         message += "\n━━━━━━━━━━━━━━━━\n";
         message += `*TOTAL: Rp ${total.toLocaleString("id-ID")}*\n\n`;
 
+        if (customerNotes) {
+          message += `*CATATAN:* ${customerNotes}\n`;
+        }
+
+        message += `Waktu Pemesanan:\n ${orderTime}\n`;
+
         if (paymentMethod === "Transfer BCA" || paymentMethod === "QRIS") {
           message += "*CATATAN PENTING:*\n";
           message +=
             "Mohon kirimkan FOTO BUKTI PEMBAYARAN setelah pesan ini terkirim. Terima kasih! 📸\n\n";
         }
 
-        message += "_Terima kasih telah memesan di Sehatin! 💪_";
+        message += "_Terima kasih telah memesan di Sehatin!_";
 
         // Encode pesan untuk URL
         const encodedMessage = encodeURIComponent(message);
@@ -837,9 +846,23 @@
 
       function submitForm(event) {
         event.preventDefault();
-        alert(
-          "Terima kasih! Pesan kamu sudah diterima. Kami akan segera menghubungi kamu! 📱",
-        );
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
+
+        const subject = `Pesan Baru dari ${name} - Sehatin Contact Form`;
+        const body = `Nama: ${name}\nEmail: ${email}\nNo. WA: ${phone}\n\nPesan:\n${message}`;
+
+        const mailtoLink = `mailto:sirqxir@gmail.com?subject=${encodeURIComponent(
+          subject,
+        )}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+
+        // Optional: Show alert after opening mail client (or remove if redundant)
+        alert("Membuka aplikasi email... 📧");
         event.target.reset();
       }
     </script>
